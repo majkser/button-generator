@@ -1,4 +1,15 @@
-export default function Button({ textShadow, fontStyle, fontWeight, textColor, textContent, fontSize, borderRadius }) {
+import { useContext } from "react";
+import { Context } from "../Context/Context";
+
+export default function Button( {textContent} ) {
+    
+    const { fontSize,
+        borderRadius,
+        textColor,
+        fontWeight,
+        fontStyle,
+        textShadow,
+    } = useContext(Context);
 
     return (
         <>
