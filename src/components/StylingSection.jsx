@@ -1,12 +1,19 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { Context } from "../Context/Context";
 
-export default function StylingSection({ textColor, fontSize, borderRadius, setStyles }) {
+export default function StylingSection() {
+
+    const { fontSize,
+        borderRadius,
+        textColor,
+        updateStyles,
+    } = useContext(Context);
 
     const [shadowDistance, setShadowDistance] = useState(0);
 
     function changingInput(event) {
         setShadowDistance(event.target.value);
-        setStyles("textShadow", `${event.target.value}px ${event.target.value}px rgba(0, 0, 0, 0.25)`)
+        updateStyles("textShadow", `${event.target.value}px ${event.target.value}px rgba(0, 0, 0, 0.25)`)
     }
 
     return (
@@ -22,7 +29,7 @@ export default function StylingSection({ textColor, fontSize, borderRadius, setS
                             min="1"
                             max="100"
                             value={fontSize}
-                            onChange={(event) => setStyles("fontSize", event.target.value)}
+                            onChange={(event) => updateStyles("fontSize", event.target.value)}
                         />
                     </div>
                     <div className="m-4">
@@ -30,14 +37,14 @@ export default function StylingSection({ textColor, fontSize, borderRadius, setS
                         <label className="m-4" htmlFor="bold">
                             <input
                                 type="checkbox"
-                                onChange={(event) => setStyles("fontWeight", event.target.checked ? "bold" : "normal")}
+                                onChange={(event) => updateStyles("fontWeight", event.target.checked ? "bold" : "normal")}
                             />
                             bold
                         </label>
                         <label className="m-4" htmlFor="italic">
                             <input
                                 type="checkbox"
-                                onChange={(event) => setStyles("fontStyle", event.target.checked ? "italic" : "normal")}
+                                onChange={(event) => updateStyles("fontStyle", event.target.checked ? "italic" : "normal")}
                             />
                             italic
                         </label>
@@ -49,7 +56,7 @@ export default function StylingSection({ textColor, fontSize, borderRadius, setS
                             min="1"
                             max="100"
                             value={textColor}
-                            onChange={(event) => setStyles("textColor", event.target.value)}
+                            onChange={(event) => updateStyles("textColor", event.target.value)}
                         />
                     </div>
                     <div className="m-4">
@@ -90,11 +97,11 @@ export default function StylingSection({ textColor, fontSize, borderRadius, setS
                             min="1"
                             max="100"
                             value={borderRadius}
-                            onChange={(event) => setStyles("borderRadius", event.target.value)}
+                            onChange={(event) => updateStyles("borderRadius", event.target.value)}
                         />
                     </div>
                 </div>
-            
+
             </div>
 
         </>
