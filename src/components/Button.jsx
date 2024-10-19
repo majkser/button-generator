@@ -1,4 +1,4 @@
-export default function Button({ textContent, fontSize, borderRadius }) {
+export default function Button({ textShadow, fontStyle, fontWeight, textColor, textContent, fontSize, borderRadius }) {
 
     return (
         <>
@@ -6,6 +6,10 @@ export default function Button({ textContent, fontSize, borderRadius }) {
                 <button style={{
                     fontSize: `${fontSize}px`,
                     borderRadius: `${borderRadius}px`,
+                    color: textColor,
+                    fontWeight: fontWeight,
+                    fontStyle: fontStyle,
+                    textShadow: textShadow,
                 }}>{textContent}</button>
             </div>
         </>
