@@ -1,4 +1,4 @@
-import { useRef, useState, useContext } from "react";
+import { useContext } from "react";
 import { Context } from "../Context/Context";
 
 export default function StylingSection() {
@@ -6,52 +6,11 @@ export default function StylingSection() {
     const { fontSize,
         borderRadius,
         textColor,
+        shadowDistance,
         updateStyles,
+        handleShadowDistanceChange,
+        handleShadowDirectionChange,
     } = useContext(Context);
-
-    const [shadowDistance, setShadowDistance] = useState(0);
-    const [shadowDirection, setShadowDirection] = useState("top-right");
-    const selectRef = useRef(null);
-
-    function handleShadowDistanceChange(event) {
-        const distance = event.target.value;
-        setShadowDistance(distance);
-        updateShadow(distance, shadowDirection);
-    }
-
-    function handleShadowDirectionChange(event) {
-        const direction = event.target.value;
-        setShadowDirection(direction);
-        updateShadow(shadowDistance, direction);
-    }
-
-    function updateShadow(distance, direction) { 
-        let x = 0, y = 0;
-        
-        switch (direction) {
-            case "top-right":
-                x = distance;
-                y = -distance;
-                break;
-            case "top-left":
-                x = -distance;
-                y = -distance;
-                break;
-            case "bottom-right":
-                x = distance;
-                y = distance;
-                break;
-            case "bottom-left":
-                x = -distance;
-                y = distance;
-                break;
-            default:
-                x = distance;
-                y = distance;
-                break;
-        }
-        updateStyles("textShadow", `${x}px ${y}px rgba(0, 0, 0, 0.25)`);
-    }
 
     return (
         <>
@@ -104,10 +63,10 @@ export default function StylingSection() {
                                 min="0"
                                 max="15"
                                 value={shadowDistance}
-                                onChange={handleShadowDistanceChange}
+                                onChange={(event) => handleShadowDistanceChange(event)}
                             />
                             <h2>shadow direction: </h2>
-                            <select ref={selectRef} onChange={handleShadowDirectionChange}>
+                            <select onChange={(event) => handleShadowDirectionChange(event)}>
                                 <option value="top-right">
                                     ↗
                                 </option>
