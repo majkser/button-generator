@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { Context } from "../Context/Context";
 
 export default function StylingSection() {
@@ -6,15 +6,11 @@ export default function StylingSection() {
     const { fontSize,
         borderRadius,
         textColor,
+        shadowDistance,
         updateStyles,
+        handleShadowDistanceChange,
+        handleShadowDirectionChange,
     } = useContext(Context);
-
-    const [shadowDistance, setShadowDistance] = useState(0);
-
-    function changingInput(event) {
-        setShadowDistance(event.target.value);
-        updateStyles("textShadow", `${event.target.value}px ${event.target.value}px rgba(0, 0, 0, 0.25)`)
-    }
 
     return (
         <>
@@ -67,20 +63,20 @@ export default function StylingSection() {
                                 min="0"
                                 max="15"
                                 value={shadowDistance}
-                                onChange={changingInput}
+                                onChange={(event) => handleShadowDistanceChange(event)}
                             />
                             <h2>shadow direction: </h2>
-                            <select name="" id="">
-                                <option value="">
+                            <select onChange={(event) => handleShadowDirectionChange(event)}>
+                                <option value="top-right">
                                     ↗
                                 </option>
-                                <option value="">
+                                <option value="top-left">
                                     ↖
                                 </option>
-                                <option value="">
+                                <option value="bottom-right">
                                     ↘
                                 </option>
-                                <option value="">
+                                <option value="bottom-left">
                                     ↙
                                 </option>
                             </select>
