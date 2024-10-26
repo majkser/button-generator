@@ -18,7 +18,7 @@ export default function StylingSection() {
   return (
     <>
       <div className="flex justify-around">
-        <div className="p-4 rounded-3xl bg-[#BBA1E0] text-center text-white w-72 shadow-2xl">
+        <div className="p-4 rounded-3xl bg-[#BBA1E0] text-center text-white w-72 shadow-lg transform hover:scale-105 hover:opacity-90 hover:shadow-2xl transition duration-300">
           <h2 className="text-2xl m-2 mb-8">Text Styling Section</h2>
           <div className="m-4">
             <h2>font size: {fontSize}px</h2>
@@ -112,7 +112,7 @@ export default function StylingSection() {
         </div>
 
         <div className="flex justify-around">
-          <div className="p-4 rounded-3xl bg-[#BBA1E0] text-center text-white w-72 shadow-2xl">
+          <div className="p-4 rounded-3xl bg-[#BBA1E0] text-center text-white w-72 shadow-lg transform hover:scale-105 hover:opacity-90 hover:shadow-2xl transition duration-300">
             <h2 className="text-2xl m-2 mb-8">Button Styling Section</h2>
             <div className="m-4">
               <h2>border radius: {borderRadius}px</h2>
