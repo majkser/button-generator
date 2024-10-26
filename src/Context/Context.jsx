@@ -11,7 +11,12 @@ export const Context = createContext({
   shadowDistance: 0,
   boxShadowDistance: 0,
   backgroundColor: "white",
+  boxShadowDirection: "center",
+  shadowDirection: "center",
+  boxShadowBlur: 10,
+  shadowBlur: 5,
   updateStyles: () => {},
+  updateShadow: () => {},
   handleShadowDistanceChange: () => {},
   handleShadowDirectionChange: () => {},
   handleBoxShadowDistanceChange: () => {},
@@ -30,43 +35,43 @@ export default function ContextProvider({ children }) {
     backgroundColor: "white",
   });
 
-  const [shadowDistance, setShadowDistance] = useState(0);
-  const [shadowDirection, setShadowDirection] = useState("top-right");
-  const [boxShadowDistance, setBoxShadowDistance] = useState(0);
-  const [boxShadowDirection, setBoxShadowDirection] = useState("top-right");
+  const [shadowStyles, setShadowStyles] = useState({
+    shadowDistance: 0,
+    shadowDirection: "top-right",
+    shadowBlur: 5,
+    boxShadowDistance: 0,
+    boxShadowDirection: "top-right",
+    boxShadowBlur: 10,
+  });
 
   function updateStyles(key, value) {
-    setStyles({
-      ...styles,
+    setStyles((prevStyles) => ({
+      ...prevStyles,
       [key]: value,
+    }));
+  }
+
+  function updateShadow(key, value) {
+    setShadowStyles((prevShadowStyles) => {
+      const newShadowStyles = {
+        ...prevShadowStyles,
+        [key]: value,
+      };
+      updateTextShadow(
+        newShadowStyles.shadowDistance,
+        newShadowStyles.shadowDirection,
+        newShadowStyles.shadowBlur
+      );
+      updateBoxShadow(
+        newShadowStyles.boxShadowDistance,
+        newShadowStyles.boxShadowDirection,
+        newShadowStyles.boxShadowBlur
+      );
+      return newShadowStyles;
     });
   }
 
-  function handleShadowDistanceChange(event) {
-    const distance = event.target.value;
-    setShadowDistance(distance);
-    updateShadow(distance, shadowDirection);
-  }
-
-  function handleShadowDirectionChange(event) {
-    const direction = event.target.value;
-    setShadowDirection(direction);
-    updateShadow(shadowDistance, direction);
-  }
-
-  function handleBoxShadowDistanceChange(event) {
-    const boxDistance = event.target.value;
-    setBoxShadowDistance(boxDistance);
-    updateBoxShadow(boxDistance, boxShadowDirection);
-  }
-
-  function handleBoxShadowDirectionChange(event) {
-    const boxDirection = event.target.value;
-    setBoxShadowDirection(boxDirection);
-    updateBoxShadow(boxShadowDistance, boxDirection);
-  }
-
-  function updateShadow(distance, direction) {
+  function updateTextShadow(distance, direction, blur) {
     let x = 0,
       y = 0;
 
@@ -87,15 +92,19 @@ export default function ContextProvider({ children }) {
         x = -distance;
         y = distance;
         break;
+      case "center":
+        x = 0;
+        y = 0;
+        break;
       default:
         x = distance;
         y = distance;
         break;
     }
-    updateStyles("textShadow", `${x}px ${y}px 5px rgba(0, 0, 0, 0.25)`);
+    updateStyles("textShadow", `${x}px ${y}px ${blur}px rgba(0, 0, 0, 0.25)`);
   }
 
-  function updateBoxShadow(distance, direction) {
+  function updateBoxShadow(distance, direction, blur) {
     let x = 0,
       y = 0;
 
@@ -116,23 +125,25 @@ export default function ContextProvider({ children }) {
         x = -distance;
         y = distance;
         break;
+      case "center":
+        x = 0;
+        y = 0;
+        break;
       default:
-        brake;
+        x = distance;
+        y = distance;
+        break;
     }
-    updateStyles("boxShadow", `${x}px ${y}px 10px rgba(0, 0, 0, 0.25)`);
+    updateStyles("boxShadow", `${x}px ${y}px ${blur}px rgba(0, 0, 0, 0.25)`);
   }
 
   return (
     <Context.Provider
       value={{
         ...styles,
-        shadowDistance,
-        boxShadowDistance,
+        ...shadowStyles,
         updateStyles,
-        handleShadowDistanceChange,
-        handleShadowDirectionChange,
-        handleBoxShadowDistanceChange,
-        handleBoxShadowDirectionChange,
+        updateShadow,
       }}
     >
       {children}

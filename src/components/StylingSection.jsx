@@ -9,11 +9,10 @@ export default function StylingSection() {
     shadowDistance,
     boxShadowDistance,
     backgroundColor,
+    boxShadowBlur,
+    shadowBlur,
     updateStyles,
-    handleShadowDistanceChange,
-    handleShadowDirectionChange,
-    handleBoxShadowDistanceChange,
-    handleBoxShadowDirectionChange,
+    updateShadow,
   } = useContext(Context);
 
   return (
@@ -80,18 +79,34 @@ export default function StylingSection() {
                 min="0"
                 max="15"
                 value={shadowDistance}
-                onChange={(event) => handleShadowDistanceChange(event)}
+                onChange={(event) =>
+                  updateShadow("shadowDistance", event.target.value)
+                }
               />
               <h2>shadow direction: </h2>
               <select
                 className="bg-[#D4E7FE] border border-[#A3BDED] text-[#3D3D3D] p-1 rounded-lg"
-                onChange={(event) => handleShadowDirectionChange(event)}
+                onChange={(event) =>
+                  updateShadow("shadowDirection", event.target.value)
+                }
               >
+                <option value="center">center</option>
                 <option value="top-right">↗</option>
                 <option value="top-left">↖</option>
                 <option value="bottom-right">↘</option>
                 <option value="bottom-left">↙</option>
               </select>
+              <h2 className="mt-2">shadow blur: </h2>
+              <input
+                className="accent-[#7FB3D5]"
+                type="range"
+                min="0"
+                max="12"
+                value={shadowBlur}
+                onChange={(event) =>
+                  updateShadow("shadowBlur", event.target.value)
+                }
+              />
             </label>
           </div>
         </div>
@@ -126,25 +141,41 @@ export default function StylingSection() {
             </div>
             <div className="m-4">
               <label htmlFor="boxShadow">
-                <h2>shadow distance from button: </h2>
+                <h2 className="mt-2">shadow distance from button: </h2>
                 <input
                   className="accent-[#7FB3D5]"
                   type="range"
                   min="0"
                   max="25"
                   value={boxShadowDistance}
-                  onChange={(event) => handleBoxShadowDistanceChange(event)}
+                  onChange={(event) =>
+                    updateShadow("boxShadowDistance", event.target.value)
+                  }
                 />
-                <h2>shadow direction: </h2>
+                <h2 className="mt-2">shadow direction: </h2>
                 <select
                   className="bg-[#D4E7FE] border border-[#A3BDED] text-[#3D3D3D] p-1 rounded-lg"
-                  onChange={(event) => handleBoxShadowDirectionChange(event)}
+                  onChange={(event) =>
+                    updateShadow("boxShadowDirection", event.target.value)
+                  }
                 >
+                  <option value="center">center</option>
                   <option value="top-right">↗</option>
                   <option value="top-left">↖</option>
                   <option value="bottom-right">↘</option>
                   <option value="bottom-left">↙</option>
                 </select>
+                <h2 className="mt-2">shadow blur: </h2>
+                <input
+                  className="accent-[#7FB3D5]"
+                  type="range"
+                  min="0"
+                  max="50"
+                  value={boxShadowBlur}
+                  onChange={(event) =>
+                    updateShadow("boxShadowBlur", event.target.value)
+                  }
+                />
               </label>
             </div>
           </div>

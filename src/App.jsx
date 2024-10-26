@@ -10,7 +10,7 @@ function App() {
 
   return (
     <ContextProvider>
-      <h1 className="text-7xl text-[#7FB3D5] mx-auto mt-20 mb-16">
+      <h1 className="text-7xl text-[#8b6cb6] mx-auto mt-20 mb-16">
         Button Generator App
       </h1>
       <Input textContent={textContent} setTextContent={setTextContent} />
