@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 
 export const Context = createContext({
   fontSize: 75,
-  borderRadius: 8,
+  borderRadius: 24,
   textColor: "black",
   fontWeight: "normal",
   fontStyle: "normal",
@@ -15,8 +15,8 @@ export const Context = createContext({
   shadowDirection: "center",
   boxShadowBlur: 10,
   shadowBlur: 5,
-  paddingX: 5,
-  paddingY: 5,
+  paddingX: 20,
+  paddingY: 40,
   updateStyles: () => {},
   updateShadow: () => {},
   handleShadowDistanceChange: () => {},
@@ -28,15 +28,15 @@ export const Context = createContext({
 export default function ContextProvider({ children }) {
   const [styles, setStyles] = useState({
     fontSize: 75,
-    borderRadius: 8,
+    borderRadius: 24,
     textColor: "black",
     fontWeight: "normal",
     fontStyle: "normal",
     textShadow: `none`,
     boxShadow: `none`,
     backgroundColor: "white",
-    paddingX: 5,
-    paddingY: 5,
+    paddingX: 20,
+    paddingY: 40,
   });
 
   const [shadowStyles, setShadowStyles] = useState({
