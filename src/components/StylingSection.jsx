@@ -11,6 +11,8 @@ export default function StylingSection() {
     backgroundColor,
     boxShadowBlur,
     shadowBlur,
+    paddingX,
+    paddingY,
     updateStyles,
     updateShadow,
   } = useContext(Context);
@@ -177,6 +179,34 @@ export default function StylingSection() {
                   }
                 />
               </label>
+            </div>
+            <div className="flex justify-center">
+              <div>
+                <h2 className="mt-2">padding Y axis: </h2>
+                <input
+                  className="accent-[#7FB3D5] w-2/3"
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={paddingX}
+                  onChange={(event) =>
+                    updateStyles("paddingX", event.target.value)
+                  }
+                />
+              </div>
+              <div>
+                <h2 className="mt-2">padding X axis: </h2>
+                <input
+                  className="accent-[#7FB3D5] w-2/3"
+                  type="range"
+                  min="0"
+                  max="200"
+                  value={paddingY}
+                  onChange={(event) =>
+                    updateStyles("paddingY", event.target.value)
+                  }
+                />
+              </div>
             </div>
           </div>
         </div>

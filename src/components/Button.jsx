@@ -11,6 +11,8 @@ export default function Button({ textContent }) {
     textShadow,
     boxShadow,
     backgroundColor,
+    paddingX,
+    paddingY,
   } = useContext(Context);
 
   return (
@@ -26,6 +28,7 @@ export default function Button({ textContent }) {
             textShadow: textShadow,
             boxShadow: boxShadow,
             backgroundColor: backgroundColor,
+            padding: `${paddingX}px ${paddingY}px`,
           }}
         >
           {textContent}

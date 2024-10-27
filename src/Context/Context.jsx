@@ -15,6 +15,8 @@ export const Context = createContext({
   shadowDirection: "center",
   boxShadowBlur: 10,
   shadowBlur: 5,
+  paddingX: 5,
+  paddingY: 5,
   updateStyles: () => {},
   updateShadow: () => {},
   handleShadowDistanceChange: () => {},
@@ -33,6 +35,8 @@ export default function ContextProvider({ children }) {
     textShadow: `none`,
     boxShadow: `none`,
     backgroundColor: "white",
+    paddingX: 5,
+    paddingY: 5,
   });
 
   const [shadowStyles, setShadowStyles] = useState({
