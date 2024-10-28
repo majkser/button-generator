@@ -79,7 +79,7 @@ export default function StylingSection() {
                 className="accent-[#7FB3D5]"
                 type="range"
                 min="0"
-                max="15"
+                max="50"
                 value={shadowDistance}
                 onChange={(event) =>
                   updateShadow("shadowDistance", event.target.value)
@@ -92,11 +92,11 @@ export default function StylingSection() {
                   updateShadow("shadowDirection", event.target.value)
                 }
               >
-                <option value="center">center</option>
                 <option value="top-right">↗</option>
                 <option value="top-left">↖</option>
                 <option value="bottom-right">↘</option>
                 <option value="bottom-left">↙</option>
+                <option value="center">center</option>
               </select>
               <h2 className="mt-2">shadow blur: </h2>
               <input
@@ -148,7 +148,7 @@ export default function StylingSection() {
                   className="accent-[#7FB3D5]"
                   type="range"
                   min="0"
-                  max="25"
+                  max="50"
                   value={boxShadowDistance}
                   onChange={(event) =>
                     updateShadow("boxShadowDistance", event.target.value)
@@ -161,11 +161,11 @@ export default function StylingSection() {
                     updateShadow("boxShadowDirection", event.target.value)
                   }
                 >
-                  <option value="center">center</option>
                   <option value="top-right">↗</option>
                   <option value="top-left">↖</option>
                   <option value="bottom-right">↘</option>
                   <option value="bottom-left">↙</option>
+                  <option value="center">center</option>
                 </select>
                 <h2 className="mt-2">shadow blur: </h2>
                 <input
