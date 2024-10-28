@@ -30,7 +30,7 @@ export default function Code({ textContent }) {
 
     if (buttonElement) {
       domtoimage
-        .toSvg(buttonElement)
+        .toPng(buttonElement)
         .then((dataUrl) => {
           saveAs(dataUrl, "button.png");
         })
