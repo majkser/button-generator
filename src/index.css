@@ -31,8 +31,34 @@ button {
 .input-small-text {
   position: absolute;
   top: 87%;
-  right: 10px; /* Distance from the right */
+  right: 10px;
   transform: translateY(-50%);
   font-size: 12px;
-  pointer-events: none; /* Make sure text is not clickable */
+  pointer-events: none;
+}
+
+.downloadAnchor {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  border: 2px solid transparent;
+  transition: color 0.3s ease;
+}
+
+.downloadAnchor::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #3498db;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.downloadAnchor:hover::before {
+  transform: scaleX(1);
 }

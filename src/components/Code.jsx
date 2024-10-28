@@ -20,8 +20,40 @@ export default function Code({ textContent }) {
   const [click, setClick] = useState(true);
   const buttonRef = useRef();
 
+  const [copyState, setCopyState] = useState("Copy to clipboard");
+
   function handleClick() {
     setClick(() => !click);
+  }
+
+  const textToCopy = `.button {
+    font-size: ${fontSize}px;
+    border-radius: ${borderRadius}px;
+    color: ${textColor};
+    font-weight: ${fontWeight};
+    font-style: ${fontStyle};
+    text-shadow: ${textShadow};
+    box-shadow: ${boxShadow};
+    background-color: ${backgroundColor};
+    padding: ${paddingX}px ${paddingY}px;
+  }`;
+
+  function coppyToClipboard() {
+    navigator.clipboard
+      .writeText(textToCopy)
+      .then(() => {
+        setCopyState("Copied to clipboard!");
+        setTimeout(() => {
+          setCopyState("Copy to clipboard");
+        }, 3000);
+      })
+      .catch(() => {
+        setCopyState("Failed to copy!");
+        console.error("Failed to copy!");
+        setTimeout(() => {
+          setCopyState("Copy to clipboard");
+        }, 3000);
+      });
   }
 
   const downloadAsPng = (event) => {
@@ -52,7 +84,9 @@ export default function Code({ textContent }) {
         </button>
         <button
           onClick={handleClick}
-          className={`w-1/2 bg-[${!click ? "#A7C7E7" : "#8b6cb6"}] mx-2`}
+          className={`w-1/2 bg-[${
+            !click ? "#A7C7E7" : "#8b6cb6"
+          }] mx-2 my-auto`}
           disabled={!click}
         >
           PNG IMAGE
@@ -60,35 +94,72 @@ export default function Code({ textContent }) {
       </div>
       <div className="w-1/3 mx-auto my-0 border-4 border-[#8b6cb6] rounded-xl p-3">
         {!click ? (
-          <div>
-            <a href="#" onClick={downloadAsPng}>
+          <div className="bg-gray-900 p-4 rounded-md h-[150px] flex justify-center items-center">
+            <button
+              className="downloadAnchor bg-transparent text-blue-400"
+              href="#"
+              onClick={downloadAsPng}
+            >
               download PNG
-            </a>
+            </button>
           </div>
         ) : (
-          <div>
+          <div className="bg-gray-900 p-4 rounded-md h-[150px] overflow-y-auto font-mono text-sm text-gray-200">
+            <div className="h-1/2">
+              <button
+                onClick={coppyToClipboard}
+                className={`downloadAnchor bg-transparent ${
+                  copyState === "Copied to clipboard!"
+                    ? "text-green-400"
+                    : copyState === "Failed to copy!"
+                    ? "text-red-400"
+                    : "text-blue-400"
+                }`}
+                disabled={
+                  copyState === "Copied to clipboard!" ||
+                  copyState === "Failed to copy!"
+                }
+              >
+                {copyState}
+              </button>
+            </div>
             <p>
-              .button &#123;
+              <span className="text-blue-400">.button</span>{" "}
+              <span className="text-gray-200">&#123;</span>
               <br />
-              font-size: {fontSize}px;
+              &nbsp;&nbsp;<span className="text-green-400">
+                font-size
+              </span>: <span className="text-pink-500">{fontSize}</span>px;
               <br />
-              border-radius: {borderRadius}px;
+              &nbsp;&nbsp;<span className="text-green-400">
+                border-radius
+              </span>: <span className="text-pink-500">{borderRadius}</span>px;
               <br />
-              color: {textColor};
+              &nbsp;&nbsp;<span className="text-green-400">color</span>:{" "}
+              <span className="text-pink-500">{textColor}</span>;<br />
+              &nbsp;&nbsp;<span className="text-green-400">
+                font-weight
+              </span>: <span className="text-pink-500">{fontWeight}</span>;
               <br />
-              font-weight: {fontWeight};
+              &nbsp;&nbsp;<span className="text-green-400">
+                font-style
+              </span>: <span className="text-pink-500">{fontStyle}</span>;<br />
+              &nbsp;&nbsp;<span className="text-green-400">
+                text-shadow
+              </span>: <span className="text-pink-500">{textShadow}</span>;
               <br />
-              font-style: {fontStyle};
+              &nbsp;&nbsp;<span className="text-green-400">
+                box-shadow
+              </span>: <span className="text-pink-500">{boxShadow}</span>;<br />
+              &nbsp;&nbsp;
+              <span className="text-green-400">background-color</span>:{" "}
+              <span className="text-pink-500">{backgroundColor}</span>;
               <br />
-              text-shadow: {textShadow};
+              &nbsp;&nbsp;<span className="text-green-400">padding</span>:{" "}
+              <span className="text-pink-500">{paddingX}</span>px{" "}
+              <span className="text-pink-500">{paddingY}</span>px;
               <br />
-              box-shadow: {boxShadow};
-              <br />
-              background-color: {backgroundColor};
-              <br />
-              padding: {paddingX}px {paddingY}px;
-              <br />
-              &#125;
+              <span className="text-gray-200">&#125;</span>
             </p>
           </div>
         )}
