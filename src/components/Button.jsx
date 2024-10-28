@@ -19,6 +19,7 @@ export default function Button({ textContent }) {
     <>
       <div className=" h-52 w-2/3 mx-auto mt-8 mb-4">
         <button
+          className="transition-all duration-300"
           style={{
             fontSize: `${fontSize}px`,
             borderRadius: `${borderRadius}px`,

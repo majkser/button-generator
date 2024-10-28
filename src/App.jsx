@@ -4,6 +4,7 @@ import StylingSection from "./components/StylingSection.jsx";
 import { useState } from "react";
 import Input from "./components/Input.jsx";
 import ContextProvider from "./Context/Context.jsx";
+import Code from "./components/Code.jsx";
 
 function App() {
   const [textContent, setTextContent] = useState("Click me!");
@@ -16,6 +17,7 @@ function App() {
       <Input textContent={textContent} setTextContent={setTextContent} />
       <Button textContent={textContent} />
       <StylingSection />
+      <Code textContent={textContent} />
     </ContextProvider>
   );
 }
